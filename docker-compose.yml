@@ -1,0 +1,71 @@
+version: '3.8'
+
+services: 
+  main:
+    build: 
+      dockerfile: Dockerfile
+      context: ./main
+    command: node server.js
+    image: joaod/main_calculator
+    container_name: main_calculator
+    ports: 
+      - 8000:8000
+    networks: 
+      - lan
+    depends_on: 
+      - division
+      - multiplication
+      - subtraction
+      - sum
+
+  division:
+    build: 
+      dockerfile: Dockerfile
+      context: ./division
+    command: node server.js
+    image: joaod/division_calculator
+    container_name: division_calculator
+    ports: 
+      - 8100:8000
+    networks: 
+      - lan
+
+  multiplication:
+    build: 
+      dockerfile: Dockerfile
+      context: ./multiplication
+    command: node server.js
+    image: joaod/multiplication_calculator
+    container_name: multiplication_calculator
+    ports: 
+      - 8200:8000
+    networks: 
+      - lan
+
+  subtraction:
+    build: 
+      dockerfile: Dockerfile
+      context: ./subtraction
+    command: node server.js
+    image: joaod/subtraction_calculator
+    container_name: subtraction_calculator
+    ports: 
+      - 8300:8000
+    networks: 
+      - lan
+
+  sum:
+    build: 
+      dockerfile: Dockerfile
+      context: ./sum
+    command: node server.js
+    image: joaod/sum_calculator
+    container_name: sum_calculator
+    ports: 
+      - 8400:8000
+    networks: 
+      - lan
+      
+networks: 
+  lan:
+    driver: bridge
