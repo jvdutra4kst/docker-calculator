@@ -4,7 +4,7 @@ module.exports = {
     async operate(request, response) {
         const { num1, num2 } = request.body;
 
-        const result = (await axios.post(`http://${process.env.MULTIPLICATION_NAME}:8000/`, {
+        const result = (await axios.post(process.env.MULTIPLICATION_URL, {
             num1,
             num2
         })).data;

@@ -9,9 +9,9 @@ services:
     image: joaod/main_calculator
     container_name: main_calculator
     ports: 
-      - 8000:8000
+      - ${MAIN_PORT}:${PORT}
     networks: 
-      - lan
+      - overlay
     depends_on: 
       - division
       - multiplication
@@ -24,11 +24,11 @@ services:
       context: ./division
     command: node server.js
     image: joaod/division_calculator
-    container_name: division_calculator
+    container_name: ${DIVISION_NAME}
     ports: 
-      - 8100:8000
+      - ${DIVISION_PORT}:${PORT}
     networks: 
-      - lan
+      - overlay
 
   multiplication:
     build: 
@@ -36,11 +36,11 @@ services:
       context: ./multiplication
     command: node server.js
     image: joaod/multiplication_calculator
-    container_name: multiplication_calculator
+    container_name: ${MULTIPLICATION_NAME}
     ports: 
-      - 8200:8000
+      - ${MULTIPLICATION_PORT}:${PORT}
     networks: 
-      - lan
+      - overlay
 
   subtraction:
     build: 
@@ -48,11 +48,11 @@ services:
       context: ./subtraction
     command: node server.js
     image: joaod/subtraction_calculator
-    container_name: subtraction_calculator
+    container_name: ${SUBTRACTION_NAME}
     ports: 
-      - 8300:8000
+      - ${SUBTRACTION_PORT}:${PORT}
     networks: 
-      - lan
+      - overlay
 
   sum:
     build: 
@@ -60,12 +60,12 @@ services:
       context: ./sum
     command: node server.js
     image: joaod/sum_calculator
-    container_name: sum_calculator
+    container_name: ${SUM_NAME}
     ports: 
-      - 8400:8000
+      - ${SUM_PORT}:${PORT}
     networks: 
-      - lan
+      - overlay
       
 networks: 
-  lan:
-    driver: bridge
+  overlay:
+    driver: overlay

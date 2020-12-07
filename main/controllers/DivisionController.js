@@ -4,7 +4,7 @@ module.exports = {
     async operate(request, response) {
         const { num1, num2 } = request.body;
 
-        const result = (await axios.post(`http://${process.env.DIVISION_NAME}:8000/`, {
+        const result = (await axios.post(process.env.DIVISION_URL, {
             num1,
             num2
         })).data;
